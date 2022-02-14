@@ -37,5 +37,13 @@ public class Main {
             System.out.println(res2.val);
             res2=res2.next;
         }
+
+        System.out.println(solution.lengthOfLongestSubstring("s"));
+
+        int[] nums1 = new int[]{1,2};
+        int[] nums2 = new int[]{3,4};
+        System.out.println(solution.findMedianSortedArrays(nums1,nums2));
+
+        System.out.println(solution.longestPalindrome("cbbd"));
     }
 }
