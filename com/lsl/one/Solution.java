@@ -1,6 +1,8 @@
 package com.lsl.one;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Solution {
@@ -151,5 +153,95 @@ public class Solution {
             }
         }
         return s.substring(begin,begin+maxLen);
+    }
+
+    public String convert(String s, int numRows) {
+        if(numRows == 1){
+            return s;
+        }
+        List<StringBuffer> rows = new ArrayList<>();
+        for (int i=0;i<Math.min(numRows,s.length());i++){
+            rows.add(new StringBuffer());
+        }
+        int curRow = 0;
+        boolean goingDown = false;
+        for (char c : s.toCharArray()) {
+            rows.get(curRow).append(c);
+            if(curRow==0||curRow==numRows-1){
+                goingDown = !goingDown;
+            }
+            curRow += goingDown?1:-1;
+        }
+        StringBuilder result = new StringBuilder();
+        for (StringBuffer row : rows) {
+            result.append(row);
+        }
+        return result.toString();
+    }
+
+    public int reverse(int x){
+        int rev = 0;
+        while (x!=0){
+            if(rev<Integer.MIN_VALUE / 10 || rev > Integer.MAX_VALUE/10){
+                return 0;
+            }
+            int digit = x % 10;
+            x /= 10;
+            rev = rev * 10 + digit;
+        }
+        return rev;
+    }
+
+    public int myAtoi(String s){
+        Automaton automaton = new Automaton();
+        int length = s.length();
+        for (int i=0;i<length;i++){
+            automaton.get(s.charAt(i));
+        }
+        return (int)(automaton.sign * automaton.ans);
+    }
+
+    public boolean isPalindrome(int x) {
+        int rev = 0;
+        if(x<0 || (x%10 == 0  && x != 0)){
+            return false;
+        }
+        while (x > rev ){
+            rev = rev * 10 + x % 10;
+            x /= 10;
+        }
+        return rev == x || x == rev / 10;
+    }
+
+    public boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+        boolean[][] f = new boolean[m+1][n+1];
+        f[0][0] = true;
+        for(int i=0;i<=m;i++){
+            for(int j=1;j<=n;j++){
+                if(p.charAt(j-1)=='*'){
+                    f[i][j] = f[i][j-2];
+                    if(matches(s,p,i,j-1)){
+                        f[i][j] = f[i][j] || f[i-1][j];
+                    }
+                }else{
+                    if(matches(s,p,i,j)){
+                        f[i][j]=f[i-1][j-1];
+                    }
+                }
+            }
+        }
+        return f[m][n];
+    }
+
+    public boolean matches(String s,String p,int i,int j){
+        if(i==0){
+            return false;
+        }
+        if(p.charAt(j-1)=='.'){
+            return true;
+        }
+        return s.charAt(i-1) == p.charAt(j-1);
     }
 }

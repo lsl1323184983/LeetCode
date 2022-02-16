@@ -15,35 +15,43 @@ public class Main {
         nums[2] = 11;
         nums[3] = 15;
         Solution solution = new Solution();
-        int[] res1 = solution.twoSum(nums, 9);
-        System.out.println(Arrays.toString(res1));
+//        int[] res1 = solution.twoSum(nums, 9);
+//        System.out.println(Arrays.toString(res1));
+//
+//        int[] l1 = new int[]{9,9,9,9,9,9,9};
+//        int[] l2 = new int[]{9,9,9,9};
+//        ListNode head1 = new ListNode(-1);
+//        ListNode head2 = new ListNode(-1);
+//        ListNode L1 = head1;
+//        ListNode L2 = head2;
+//        for (int i : l1) {
+//            L1.next= new ListNode(i);
+//            L1 = L1.next;
+//        }
+//        for (int i : l2) {
+//            L2.next= new ListNode(i);
+//            L2 = L2.next;
+//        }
+//        ListNode res2 = solution.addTwoNumbers(head1.next,head2.next);
+//        while(res2!=null){
+//            System.out.println(res2.val);
+//            res2=res2.next;
+//        }
+//
+//        System.out.println(solution.lengthOfLongestSubstring("s"));
+//
+//        int[] nums1 = new int[]{1,2};
+//        int[] nums2 = new int[]{3,4};
+//        System.out.println(solution.findMedianSortedArrays(nums1,nums2));
 
-        int[] l1 = new int[]{9,9,9,9,9,9,9};
-        int[] l2 = new int[]{9,9,9,9};
-        ListNode head1 = new ListNode(-1);
-        ListNode head2 = new ListNode(-1);
-        ListNode L1 = head1;
-        ListNode L2 = head2;
-        for (int i : l1) {
-            L1.next= new ListNode(i);
-            L1 = L1.next;
-        }
-        for (int i : l2) {
-            L2.next= new ListNode(i);
-            L2 = L2.next;
-        }
-        ListNode res2 = solution.addTwoNumbers(head1.next,head2.next);
-        while(res2!=null){
-            System.out.println(res2.val);
-            res2=res2.next;
-        }
+//        System.out.println(solution.longestPalindrome("cbbd"));
 
-        System.out.println(solution.lengthOfLongestSubstring("s"));
+        System.out.println(solution.convert("PAYPALISHIRING",4));
 
-        int[] nums1 = new int[]{1,2};
-        int[] nums2 = new int[]{3,4};
-        System.out.println(solution.findMedianSortedArrays(nums1,nums2));
+        System.out.println(solution.reverse(0));
 
-        System.out.println(solution.longestPalindrome("cbbd"));
+        System.out.println(solution.myAtoi("   -42"));
+
+        System.out.println(solution.isPalindrome(12321));
     }
 }
