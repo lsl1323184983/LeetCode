@@ -1,4 +1,4 @@
-package com.lsl.one;
+package com.lsl.cowman;
 
 import java.util.HashMap;
 import java.util.Map;

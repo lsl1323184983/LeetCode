@@ -1,4 +1,4 @@
-package com.lsl.one;
+package com.lsl.cowman;
 
 public class ListNode {
     public int val;

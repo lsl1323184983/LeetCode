@@ -1,20 +1,20 @@
 package com.lsl;
 
-import com.lsl.one.ListNode;
-import com.lsl.one.Solution;
+import com.lsl.cowman.ListNode;
+import com.lsl.cowman.Solution;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        int[] nums = new int[4];
-        nums[0] = 2;
-        nums[1] = 7;
-        nums[2] = 11;
-        nums[3] = 15;
         Solution solution = new Solution();
+//        int[] nums = new int[4];
+//        nums[0] = 2;
+//        nums[1] = 7;
+//        nums[2] = 11;
+//        nums[3] = 15;
 //        int[] res1 = solution.twoSum(nums, 9);
 //        System.out.println(Arrays.toString(res1));
 //
@@ -46,12 +46,39 @@ public class Main {
 
 //        System.out.println(solution.longestPalindrome("cbbd"));
 
-        System.out.println(solution.convert("PAYPALISHIRING",4));
+//        System.out.println(solution.convert("PAYPALISHIRING",4));
+//
+//        System.out.println(solution.reverse(0));
+//
+//        System.out.println(solution.myAtoi("   -42"));
+//
+//        System.out.println(solution.isPalindrome(12321));
 
-        System.out.println(solution.reverse(0));
+//        int[] height = new int[]{1,8,6,2,5,4,8,3,7};
+//        System.out.println(solution.maxArea(height));
+        //        String s = solution.intToRoman(1994);
+////        System.out.println(s);
+//        int res = solution.romanToInt("MCMXCIV");
+//        System.out.println(res);
+//        String[] strs = new String[]{"a","ac"};
+//
+//        String s = solution.longestCommonPrefix(strs);
+//        System.out.println(s);
 
-        System.out.println(solution.myAtoi("   -42"));
+//          int[] nums = new int[]{-1,0,1,2,-1,-4};
+//        List<List<Integer>> lists = solution.threeSum(nums);
+//        System.out.println(lists);
 
-        System.out.println(solution.isPalindrome(12321));
+//        String digits = "23";
+//        List<String> list = solution.letterCombinations(digits);
+//        System.out.println(list);
+//        int[] nums = new int[]{0,0,0};
+//        int target = 1;
+//        int res = solution.threeSumClosest(nums, target);
+//        System.out.println(res);
+//        int[] nums = new int[]{1,0,-1,0,-2,2};
+//        int target = 0;
+//        List<List<Integer>> lists = solution.fourSum(nums, target);
+//        System.out.println(lists);
     }
 }
