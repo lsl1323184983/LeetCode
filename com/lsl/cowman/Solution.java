@@ -1,5 +1,8 @@
 package com.lsl.cowman;
 
+import com.sun.source.tree.Tree;
+
+import java.security.PublicKey;
 import java.util.*;
 
 public class Solution {
@@ -1143,5 +1146,339 @@ public class Solution {
         list.add(root.val);
     }
 
+    /**
+     * BM26 求二叉树的层序遍历
+     * @param root
+     * @return
+     */
+    public ArrayList<ArrayList<Integer>> levelOrder (TreeNode root) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if(root == null){
+            return res;
+        }
+        Queue<TreeNode> queue = new ArrayDeque<TreeNode>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            ArrayList<Integer> row = new ArrayList<>();
+            int n = queue.size();
+            for (int i = 0; i < n; i++) {
+                TreeNode cur = queue.poll();
+                row.add(cur.val);
+                if(cur.left!=null){
+                    queue.add(cur.left);
+                }
+                if(cur.right!=null){
+                    queue.add(cur.right);
+                }
+            }
+            res.add(row);
+        }
+        return res;
+    }
+
+    /**
+     * BM27 按之字形顺序打印二叉树
+     * @param pRoot
+     * @return
+     */
+    public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
+        TreeNode head = pRoot;
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if(head == null){
+            return res;
+        }
+        Queue<TreeNode> temp = new LinkedList<>();
+        temp.add(head);
+        TreeNode p;
+        boolean flag = true;
+        while (!temp.isEmpty()){
+            ArrayList<Integer> row = new ArrayList<>();
+            int n = temp.size();
+            flag = !flag;
+            for (int i = 0; i < n; i++) {
+                p = temp.poll();
+                assert p != null;
+                row.add(p.val);
+                if(p.left!=null){
+                    temp.add(p.left);
+                }
+                if(p.right!=null){
+                    temp.add(p.right);
+                }
+            }
+            if(flag){
+                Collections.reverse(row);
+            }
+            res.add(row);
+        }
+        return res;
+    }
+
+    /**
+     * BM28 二叉树的最大深度
+     * @param root
+     * @return
+     */
+    public int maxDepth (TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return Math.max(maxDepth(root.left),maxDepth(root.right)) + 1;
+    }
+
+    public boolean hasPathSum (TreeNode root, int sum) {
+        if(root == null){
+            return false;
+        }
+        if(root.left == null && root.right == null && sum - root.val ==0){
+            return true;
+        }
+        return hasPathSum(root.left,sum-root.val)||hasPathSum(root.right,sum-root.val);
+    }
+
+    /**
+     * BM30 二叉搜索树与双向链表
+     * @param pRootOfTree
+     * @return
+     */
+    public TreeNode head = null;
+    public TreeNode pre = null;
+    public TreeNode Convert(TreeNode pRootOfTree) {
+        if(pRootOfTree == null){
+            return null;
+        }
+        Convert(pRootOfTree.left);
+        if(pre == null){
+            head = pRootOfTree;
+            pre = pRootOfTree;
+        }else {
+            pre.right = pRootOfTree;
+            pRootOfTree.left = pre;
+            pre = pRootOfTree;
+        }
+        Convert(pRootOfTree.right);
+        return head;
+    }
+
+    boolean recursion(TreeNode root1,TreeNode root2){
+        if(root1 == null && root2 == null){
+            return true;
+        }
+        if(root1 == null || root2 == null ||  root1.val!=root2.val){
+            return false;
+        }
+        return recursion(root1.left,root2.right) && recursion(root1.right,root2.left);
+    }
+
+    /**
+     * BM31 对称的二叉树
+     * @param pRoot
+     * @return
+     */
+    boolean isSymmetrical(TreeNode pRoot) {
+        if(pRoot == null){
+            return true;
+        }
+       return recursion(pRoot.left,pRoot.right);
+    }
+
+    /**
+     * BM32 合并二叉树
+     * @param t1
+     * @param t2
+     * @return
+     */
+    public TreeNode mergeTrees (TreeNode t1, TreeNode t2) {
+        if(t1 == null){
+            return t2;
+        }
+        if(t2 == null){
+            return t1;
+        }
+        TreeNode head = new TreeNode(t1.val + t2.val);
+        head.left = mergeTrees(t1.left , t2.left);
+        head.right = mergeTrees(t1.right , t2.right);
+        return head;
+    }
+
+    /**
+     * BM32 合并二叉树
+     * @param pRoot
+     * @return
+     */
+    public TreeNode Mirror (TreeNode pRoot) {
+        if(pRoot == null){
+            return null;
+        }
+        TreeNode left = Mirror(pRoot.right);
+        TreeNode right = Mirror(pRoot.left);
+        pRoot.left = left;
+        pRoot.right = right;
+        return pRoot;
+    }
+
+    int pre2 = Integer.MIN_VALUE;
+    /**
+     * BM34 判断是不是二叉搜索树
+     * @param root
+     * @return
+     */
+    public boolean isValidBST (TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if(!isValidBST(root.left)){
+            return false;
+        }
+        if(root.val < pre2){
+            return false;
+        }
+        pre2 = root.val;
+        return isValidBST(root.right);
+    }
+
+    /**
+     * BM35 判断是不是完全二叉树
+     * @param root
+     * @return
+     */
+    public boolean isCompleteTree (TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        TreeNode cur;
+        boolean notComplete = false;
+        while (!queue.isEmpty()){
+            cur = queue.poll();
+            if(cur==null){
+                notComplete = true;
+                continue;
+            }
+            if(notComplete){
+                return false;
+            }
+            queue.add(cur.left);
+            queue.add(cur.right);
+        }
+        return true;
+    }
+
+    public int deep(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = deep(root.left);
+        int right = deep(root.right);
+        return (left > right) ? left + 1 : right + 1;
+    }
+    /**
+     * BM36 判断是不是平衡二叉树
+     * @param root
+     * @return
+     */
+    public boolean IsBalanced_Solution(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        int left = deep(root.left);
+        int right = deep(root.right);
+        if(left - right > 1 || right - left > 1){
+            return false;
+        }
+        return IsBalanced_Solution(root.left) && IsBalanced_Solution(root.right);
+    }
+
+    public ArrayList<Integer> getPath(TreeNode root,int target){
+        ArrayList<Integer> path = new ArrayList<>();
+        TreeNode node = root;
+        while (node.val != target){
+            path.add(node.val);
+            if(target < node.val){
+                node = node.left;
+            }else {
+                node = node.right;
+            }
+        }
+        path.add(node.val);
+        return path;
+    }
+
+    /**
+     * BM37 二叉搜索树的最近公共祖先
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public int lowestCommonAncestor (TreeNode root, int p, int q) {
+        ArrayList<Integer> path_p = getPath(root,p);
+        ArrayList<Integer> path_q = getPath(root,q);
+        int res = 0;
+        for (int i = 0; i < path_p.size() && i < path_q.size(); i++) {
+            int x = path_p.get(i);
+            int y = path_q.get(i);
+            if(x==y){
+                res = path_p.get(i);
+            }else {
+                break;
+            }
+        }
+        return res;
+    }
+
+
+    /**
+     * BM38 在二叉树中找到两个节点的最近公共祖先
+     * @param root
+     * @param o1
+     * @param o2
+     * @return
+     */
+    public int lowestCommonAncestor2 (TreeNode root, int o1, int o2) {
+        return 0;
+    }
+
+    public int binaryArrayMinSumDiff(int[] nums){
+        int n = nums.length;
+        int currentSum[] = new int[1000000];
+        boolean state[][] = new boolean[1002][1000000];
+        if (n==0){
+            return 0;
+        }
+        if(n==1){
+            return nums[0];
+        }
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = sum / 2; j >= nums[i] ; j--) {
+                if(currentSum[j] < currentSum[j-nums[i]] + nums[i]){
+                    currentSum[j] = currentSum[j-nums[i]] + nums[i];
+                    state[i][j] = true;
+                }
+            }
+        }
+        System.out.println(sum - currentSum[sum/2]*2);
+        int i = n, j = sum / 2;
+        int index = 0;
+        int sum2 = 0;
+        while (i>0){
+            if(state[i][j]){
+                System.out.print(nums[i]+" ");
+                sum2 += nums[i];
+                j -= nums[i];
+                index++;
+            }
+            i--;
+        }
+        System.out.println();
+        System.out.println(index);
+        System.out.println(sum2);
+        return sum - currentSum[sum/2]*2;
+    }
 
 }

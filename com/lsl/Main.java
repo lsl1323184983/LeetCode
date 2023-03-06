@@ -8,6 +8,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+//        StringBuilder
 	// write your code here
         Solution solution = new Solution();
 //        int[] nums = new int[4];
@@ -80,5 +81,17 @@ public class Main {
 //        int target = 0;
 //        List<List<Integer>> lists = solution.fourSum(nums, target);
 //        System.out.println(lists);
+
+        int[] nums = new int[1001];
+        for (int i = 0; i < 5; i++) {
+            nums[i] = 10;
+        }
+        nums[991] = 1;
+        nums[992] = 3;
+        nums[993] = 23;
+        nums[995] = 17;
+        nums[994] = 47;
+        nums[998] = 88;
+        solution.binaryArrayMinSumDiff(nums);
     }
 }
