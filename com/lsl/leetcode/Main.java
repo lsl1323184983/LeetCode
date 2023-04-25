@@ -1,5 +1,7 @@
 package com.lsl.leetcode;
 
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.SynchronousQueue;
 
@@ -11,9 +13,13 @@ import java.util.concurrent.SynchronousQueue;
  */
 public class Main {
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        int []nums = new int[]{7,7,7,7,7,7,7};
-        System.out.println(solution.lengthOfLIS(nums));
+//        Solution solution = new Solution();
+//        int []nums = new int[]{7,7,7,7,7,7,7};
+//        System.out.println(solution.lengthOfLIS(nums));
+
+//        Solution solution = new Solution();
+//        int []nums = new int[]{91,60,96,13,35,77,22,46,30,10};
+//        System.out.println(Arrays.toString(solution.HeapSort(nums)));
     }
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);

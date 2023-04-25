@@ -2,7 +2,9 @@ package com.lsl.leetcode;
 
 import com.sun.management.GcInfo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : lishulong
@@ -403,5 +405,100 @@ public class Solution {
         return maxans;
     }
 
+    /**
+     * 堆排序
+     * @param sourceArray
+     * @return
+     */
+    public int[] HeapSort(int[] sourceArray){
+        int[] arr = Arrays.copyOf(sourceArray,sourceArray.length);
+        int len = arr.length;
+        buildMaxHeap(arr, len);
+        for (int i = len-1; i > 0 ; i--) {
+            swap(arr,0,i);
+            len--;
+            heapify(arr,0,len);
+        }
+        return arr;
+    }
 
+    public void buildMaxHeap(int[] arr,int len){
+        for (int i = (int) Math.floor(len / 2); i >= 0; i--) {
+            heapify(arr, i, len);
+        }
+    }
+
+    public void heapify(int[] arr,int i,int len){
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        int largest = i;
+
+        if(left < len && arr[left] < arr[largest]){
+            largest = left;
+        }
+
+        if(right < len && arr[right] < arr[largest]){
+            largest = right;
+        }
+
+        if(largest != i){
+            swap(arr, i, largest);
+            heapify(arr, largest, len);
+        }
+    }
+
+    public void swap(int[] arr,int i,int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    /**
+     * Tarjan 算法,用于求解图的连通性问题
+     */
+    public void tarjan(){
+        int length = 5;
+        int[] dfn = new int[length];
+        int[] low = new int[length];
+    }
+
+
+    /**
+     * 15. 三数之和 (排序 + 双指针)
+     * 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请
+     * 你返回所有和为 0 且不重复的三元组。
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        for (int first = 0; first < n; first++) {
+            if(first > 0 && nums[first] == nums[first-1]){
+                continue;
+            }
+            int third = n-1;
+            int target = -nums[first];
+            for (int second = first+1; second < n; second++) {
+                if(second > first + 1 && nums[second] == nums[second - 1]){
+                    continue;
+                }
+                while (second < third && nums[second] + nums[third] > target){
+                    third--;
+                }
+                if (second == third){
+                    break;
+                }
+                if(nums[second] + nums[third] == target){
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[first]);
+                    list.add(nums[second]);
+                    list.add(nums[third]);
+                    res.add(list);
+                }
+            }
+        }
+        return res;
+    }
 }
